@@ -2127,27 +2127,57 @@ function refreshWosrSelectors() {
   const box = document.getElementById("wosrSelectBox");
 
   if (!select1 || !select2 || !box) return;
-  const rule = String(CONFIG.OSR_RULE || "NONE").trim().toUpperCase();
 
-if (rule === "NONE" || rule === "NO" || rule === "ΟΧΙ" || rule === "") {
-  box.style.display = "none";
-  select1.value = "";
-  select2.value = "";
-  select1.removeAttribute("required");
-  select2.removeAttribute("required");
-  return;
-}
+  const rule = String(CONFIG.OSR_RULE || "NONE")
+    .trim()
+    .toUpperCase();
+
+  if (
+    rule === "NONE" ||
+    rule === "NO" ||
+    rule === "ΟΧΙ" ||
+    rule === ""
+  ) {
+    box.style.display = "none";
+    select1.value = "";
+    select2.value = "";
+    select1.removeAttribute("required");
+    select2.removeAttribute("required");
+    return;
+  }
 
   const previous1 = select1.value;
   const previous2 = select2.value;
 
-select1.innerHTML = '<option value="">Επιλέξτε ένα μέλος</option>';
-select2.innerHTML = '<option value="">Επιλέξτε ένα μέλος</option>';
+  select1.innerHTML =
+    '<option value="">Επιλέξτε ένα μέλος</option>';
+
+  select2.innerHTML =
+    '<option value="">Επιλέξτε ένα μέλος</option>';
 
   const rows = getCrewPdfRows();
   const captain = getCaptainState();
+  const data = lastFoundData || {};
 
-  if (!captain.name && rows.length === 0) {
+  const secondCaptain = {
+    name: String(
+      data.second_captain_name ||
+      data.secondCaptainName ||
+      ""
+    ).trim(),
+
+    card: String(
+      data.second_captain_card ||
+      data.secondCaptainCard ||
+      ""
+    ).trim()
+  };
+
+  if (
+    !captain.name &&
+    !secondCaptain.name &&
+    rows.length === 0
+  ) {
     box.style.display = "none";
     return;
   }
@@ -2167,16 +2197,45 @@ select2.innerHTML = '<option value="">Επιλέξτε ένα μέλος</option
     select2.appendChild(option2);
   }
 
+  // Κυβερνήτης Α
   if (captain.name && captain.card) {
     addOptionToBoth(
       "captain",
-      "ΚΥΒ - " + captain.name + " (" + captain.card + ")"
+      "ΚΥΒ Α - " +
+        captain.name +
+        " (" +
+        captain.card +
+        ")"
     );
   }
 
+  // Κυβερνήτης Β
+  if (secondCaptain.name) {
+    const secondCaptainLabel =
+      "ΚΥΒ Β - " +
+      secondCaptain.name +
+      (secondCaptain.card
+        ? " (" + secondCaptain.card + ")"
+        : "");
+
+    addOptionToBoth(
+      "second_captain",
+      secondCaptainLabel
+    );
+  }
+
+  // Υπόλοιπο πλήρωμα
   rows.forEach((row, index) => {
     const aa = index + 1;
-    const label = aa + " - " + (row.name || "") + " (" + (row.card || "") + ")";
+
+    const label =
+      aa +
+      " - " +
+      (row.name || "") +
+      " (" +
+      (row.card || "") +
+      ")";
+
     addOptionToBoth(String(aa), label);
   });
 
