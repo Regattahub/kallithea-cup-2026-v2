@@ -1453,10 +1453,14 @@ function getWosrName(value) {
     return captainState.name || "";
   }
 
+  if (value === "second_captain") {
+    const secondCaptainState = getSecondCaptainState();
+    return secondCaptainState.name || "";
+  }
+
   const index = parseInt(value, 10) - 1;
   return crewPdfRows[index]?.name || "";
 }
-
 params.set(fieldNames.wosr_member_1, getWosrName(wosr1Value));
 params.set(fieldNames.wosr_member_2, getWosrName(wosr2Value));
   
@@ -2120,7 +2124,33 @@ function deleteCrewRow(btn) {
 
   renumberCrewRows();
 }
+function getSecondCaptainState() {
+  const cardInput =
+    document.getElementById("secondCaptainCardInput");
 
+  const searchButton =
+    document.querySelector(
+      'button[onclick*="secondCaptainCardInput"]'
+    );
+
+  const box =
+    searchButton?.parentElement?.parentElement ||
+    cardInput?.parentElement;
+
+  return {
+    name: String(
+      box?.querySelector(".name")?.textContent || ""
+    ).trim(),
+
+    card: String(
+      cardInput?.value || ""
+    ).trim(),
+
+    club: String(
+      box?.querySelector(".club")?.textContent || ""
+    ).trim()
+  };
+}
 function refreshWosrSelectors() {
   const select1 = document.getElementById("wosrMember1");
   const select2 = document.getElementById("wosrMember2");
@@ -2157,21 +2187,7 @@ function refreshWosrSelectors() {
 
   const rows = getCrewPdfRows();
   const captain = getCaptainState();
-  const data = lastFoundData || {};
-
-  const secondCaptain = {
-    name: String(
-      data.second_captain_name ||
-      data.secondCaptainName ||
-      ""
-    ).trim(),
-
-    card: String(
-      data.second_captain_card ||
-      data.secondCaptainCard ||
-      ""
-    ).trim()
-  };
+const secondCaptain = getSecondCaptainState();
 
   if (
     !captain.name &&
