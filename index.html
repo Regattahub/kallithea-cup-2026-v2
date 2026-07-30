@@ -1181,6 +1181,7 @@ const NOTICE_INFO_TEXT =
     // =========================================
 
     const fieldNames = {
+      race_title: "typeA296",
       yacht_name: "age",
       sail_letters: "input298",
       sail_number: "typeA48",
@@ -1364,7 +1365,11 @@ function getCrewPdfRows() {
 
 function buildPrefillUrl(data) {
   const params = new URLSearchParams();
-params.set("race_title", CONFIG.EVENT_TITLE || "");
+  params.set(
+  fieldNames.race_title,
+  EVENT_TITLE || CONFIG.EVENT_TITLE || ""
+);
+
 params.set("race_date", CONFIG.RACE_DATE || "");
 params.set("submit_expiration", CONFIG.SUBMIT_EXPIRATION || "");
 params.set("organizer_banner", CONFIG.ORGANIZER_BANNER || "");
