@@ -1640,7 +1640,8 @@ if (acceptTerms && !acceptTerms.checked) {
       hideResult();
 
       try {
-       const response = await fetch(BOAT_LOOKUP_URL + "?id=" + encodeURIComponent(sailNumber));
+      await boatLookupWarmup;
+        const response = await fetch(BOAT_LOOKUP_URL + "?id=" + encodeURIComponent(sailNumber));
         const json = await response.json();
 
         if (!json.ok) {
@@ -1835,9 +1836,9 @@ window.scrollTo({ top: 0, behavior: "auto" });
 
     setupHero();
 // Προθέρμανση της υπηρεσίας αναζήτησης
-fetch(BOAT_LOOKUP_URL + "?id=__warmup__")
-  .catch(() => {});
-    
+const boatLookupWarmup =
+  fetch(BOAT_LOOKUP_URL + "?id=__warmup__")
+    .catch(() => null);    
     if (FORM_OPEN === false) {
       document.querySelector(".hero").style.display = "none";
       document.querySelector(".separator").style.display = "none";
