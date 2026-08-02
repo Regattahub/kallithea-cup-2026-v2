@@ -1834,7 +1834,10 @@ window.scrollTo({ top: 0, behavior: "auto" });
     }
 
     setupHero();
-
+// Προθέρμανση της υπηρεσίας αναζήτησης
+fetch(BOAT_LOOKUP_URL + "?id=__warmup__")
+  .catch(() => {});
+    
     if (FORM_OPEN === false) {
       document.querySelector(".hero").style.display = "none";
       document.querySelector(".separator").style.display = "none";
