@@ -3477,6 +3477,22 @@ if (changeWosr) {
    const finalCrew = getFinalCrewCandidates();
 
   try {
+    // Εμφανίζουμε πρώτα την οθόνη αναμονής και δίνουμε
+    // στον browser λίγο χρόνο να τη ζωγραφίσει πριν αρχίσει η αποθήκευση.
+    showJotformLoading();
+
+    const submitButton = document.querySelector(
+      'button[onclick="validateCrewChangeBeforeSubmit()"]'
+    );
+
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.dataset.originalText = submitButton.textContent;
+      submitButton.textContent = "ΠΑΡΑΚΑΛΟΥΜΕ ΠΕΡΙΜΕΝΕΤΕ...";
+    }
+
+    await new Promise(resolve => setTimeout(resolve, 80));
+
     setStatus(
       "Αποθηκεύονται οι αλλαγές πληρώματος...",
       false,
@@ -3512,6 +3528,19 @@ if (changeWosr) {
     window.location.href = editUrl;
 
   } catch (error) {
+    hideJotformLoading();
+
+    const submitButton = document.querySelector(
+      'button[onclick="validateCrewChangeBeforeSubmit()"]'
+    );
+
+    if (submitButton) {
+      submitButton.disabled = false;
+      submitButton.textContent =
+        submitButton.dataset.originalText ||
+        "ΣΥΝΕΧΕΙΑ ΣΤΗΝ ΚΑΤΑΧΩΡΗΣΗ ΑΛΛΑΓΗΣ";
+    }
+
     console.error(
       "Σφάλμα αποθήκευσης αλλαγής πληρώματος:",
       error
