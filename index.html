@@ -972,7 +972,7 @@ height: 100dvh !important;
     // =========================================
 
 const SETTINGS_WEB_APP_URL =
-  "https://script.google.com/macros/s/AKfycbxLgJJiPOSdhD-Vx7-00KPLmykx2jQFRDWPKxnqIGADHCD9RLXRBhVMTJTReE5msT7QmQ/exec";
+  "https://script.google.com/macros/s/AKfycbwMeEFV6BOvtfxLRYAxmUVpVTiPSoozX2sDT6_O3Eyubuu3gnuTtHGB38ojGmPrsYI/exec";
 
 // Το μοναδικό αναγνωριστικό του αρχείου ΣΥΜΜΕΤΟΧΕΣ/ΡΥΘΜΙΣΕΙΣ για το Κύπελλο Καλλιθέας.
 // Μπορεί να αντικατασταθεί και από URL: ?settings=SPREADSHEET_ID
@@ -1550,19 +1550,32 @@ function getCrewPdfRows() {
 
 function buildPrefillUrl(data) {
   const params = new URLSearchParams();
+  // ΡΥΘΜΙΣΕΙΣ ΑΓΩΝΑ -> JOTFORM ΚΥΠΕΛΛΟΥ ΚΑΛΛΙΘΕΑΣ
+  // Η φόρμα του Κυπέλλου είναι παλαιότερος κλώνος και ορισμένα πεδία
+  // διατηρούν ακόμη τα παλιά Unique Names (input289, input290, input532 κ.λπ.).
+  // Στέλνουμε και το πραγματικό Unique Name και το καθαρό alias για συμβατότητα.
   params.set(fieldNames.race_title, CONFIG.EVENT_TITLE || "");
-  // Συμβατότητα και με φόρμες που χρησιμοποιούν καθαρό Unique Name race_title.
-  if (fieldNames.race_title !== "race_title") {
-    params.set("race_title", CONFIG.EVENT_TITLE || "");
-  }
+  params.set("race_title", CONFIG.EVENT_TITLE || "");
 
-params.set("race_date", CONFIG.RACE_DATE || "");
-params.set("submit_expiration", CONFIG.SUBMIT_EXPIRATION || "");
-params.set("organizer_banner", CONFIG.ORGANIZER_BANNER || "");
-params.set("organizer_name", CONFIG.ORGANIZER_NAME || "");
-params.set("organizer_short_name", CONFIG.ORGANIZER_SHORT_NAME || "");
-params.set("organizer_email", CONFIG.ORGANIZER_EMAIL || "");
-params.set("organizer_tel", CONFIG.ORGANIZER_TEL || "");
+  params.set("input289", CONFIG.RACE_DATE || "");
+  params.set("race_date", CONFIG.RACE_DATE || "");
+
+  params.set("input290", CONFIG.SUBMIT_EXPIRATION || "");
+  params.set("submit_expiration", CONFIG.SUBMIT_EXPIRATION || "");
+
+  params.set("organizer_banner", CONFIG.ORGANIZER_BANNER || "");
+
+  params.set("input532", CONFIG.ORGANIZER_NAME || "");
+  params.set("organizer_name", CONFIG.ORGANIZER_NAME || "");
+
+  // Το πεδίο 533 έχει σήμερα Unique Name '_' στη Jotform.
+  // Κρατάμε και input533/organizer_short_name ως ασφαλή aliases.
+  params.set("_", CONFIG.ORGANIZER_SHORT_NAME || "");
+  params.set("input533", CONFIG.ORGANIZER_SHORT_NAME || "");
+  params.set("organizer_short_name", CONFIG.ORGANIZER_SHORT_NAME || "");
+
+  params.set("organizer_email", CONFIG.ORGANIZER_EMAIL || "");
+  params.set("organizer_tel", CONFIG.ORGANIZER_TEL || "");
   
   params.set(fieldNames.yacht_name, data.yacht_name || "");
   params.set(fieldNames.sail_letters, data.sail_letters || "");
