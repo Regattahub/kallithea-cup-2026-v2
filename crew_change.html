@@ -957,15 +957,15 @@ body.jotform-open #formFrame {
 
  const CONFIG = {
  EVENT_TITLE: "",
-  SETTINGS_ENDPOINT: "https://script.google.com/macros/s/AKfycbzjSJuN1YtHMyZkuV3XKeLJxT4ufe0xBhdVbjehFj9v_tzONu7eRAr3WEqBdLa3H0YJ/exec?action=settings&settings=1WNfPoNfxjvfZCwnKOpOJYUH_G_2xa06E9U3zG4BJhWw",
+  SETTINGS_ENDPOINT: "https://script.google.com/macros/s/AKfycbw9kd0R_FliGWC1akVUAST3tCXbHY6ooKF4NJ9kMfcx6ib8SXTliRB7JdMd0_YzPVXe1w/exec?action=settings&settings=1SIfMDUo65-P8YTaEfcxkYcUTb9W9-cWb2m2c5LOIk2s",
 BOAT_LOOKUP_URL: "https://script.google.com/macros/s/AKfycbwE5uJcgQt7Kw3rWFnf8yGN_tswp62x11bzdIJ1gel4loXPLimEk83Z5cxPVKbugDyBHw/exec",
   PERSON_LOOKUP_URL: "https://script.google.com/macros/s/AKfycbw-zgZZeHRC6S5_f1xGkTwx-wXcFNq9z2O4cfhzAHSULQNDrwCp88vcvgU-617pgcg1/exec",
 
   // ΠΡΟΣΟΧΗ:
   // Κρατάμε εδώ τη φόρμα που έχει τα πεδία κυβερνήτη/πληρώματος.
   // Αν φτιάξεις αντίγραφο Jotform για ΕΠΙΔΑΥΡΟΣ, βάλε εδώ το νέο URL.
-JOTFORM_BASE_URL: "https://form.jotform.com/262128273107351",
-   CREW_CHANGE_FORM_URL: "https://form.jotform.com/261776318640361",
+JOTFORM_BASE_URL: "https://form.jotform.com/262418406371354",
+   CREW_CHANGE_FORM_URL: "https://form.jotform.com/262418406371354",
 
   EVENT_LOGO: "https://github.com/jsamartzis-png/logos/blob/main/logo_EntryFlow_removebg-preview.png?raw=true",
   EVENT_BACKGROUND: "background.jpg",
@@ -993,7 +993,7 @@ const STORAGE_KEY =
   window.location.pathname.replace(/[^a-zA-Z0-9]+/g, "_");
 
     const EVENT_NOTES = [
-  "Με τη χρήση αυτής της εφαρμογής, μπορείτε εύκολα να υποβάλετε τα απαραίτητα έγγραφα και να ολοκληρώσετε την πληρωμή του παραβόλου (όλα σε ένα σημείο).",
+  "Η συμμετοχή στο Κύπελλο έχει ήδη καταχωρηθεί. Από εδώ μπορείτε να ενημερώσετε το πλήρωμα που θα συμμετάσχει στον 2ο αγώνα ΑΓΚΙΣΤΡΙ 2026.",
   'Διαβάστε την <a href="https://docs.google.com/document/d/1_ThpUPcy-w1-D5hScVCcKZ2csmjs6_m-mIkEYNY9c5I/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Πολιτική Απορρήτου</a> και τους <a href="https://docs.google.com/document/d/1Btn0eMNSZotVyH3n7RETC3ur8lZ4V_2I/edit?usp=sharing&ouid=115039995651229449950&rtpof=true&sd=true" target="_blank" rel="noopener noreferrer">Όρους Χρήσης</a>.'
 ];
 
@@ -1026,9 +1026,12 @@ const NOTICE_INFO_TEXT =
       aph_initial: "typeA439",
       dynamic_allowance: "dynamic_allowance",
       orc_class_check: "orc_class_check",
-captain_name: "skipperName",
-captain_club: "skipperClub",
-captain_card: "skipperCard",
+captain_name: "typeA93",
+captain_club: "input33",
+captain_card: "input55",
+second_captain_name: "second_captain_name",
+second_captain_card: "second_captain_card",
+second_captain_club: "second_captain_club",
      original_submission_id: "originalSubmissionId",
 crew_text: "input514",
 crew_1_name: "crew1_name",
@@ -1125,10 +1128,10 @@ wosr_member_2: "wosr_member_2"
 function loadRaceSettingsFromSheet() {
     // Άμεση αρχική εμφάνιση μέχρι να φορτωθούν οι ΡΥΘΜΙΣΕΙΣ
 const fallbackRaceTitle =
-  "9ο Κύπελλο Καλλιθέας 2026";
+  "2ος ΑΓΩΝΑΣ ΚΥΠΕΛΛΟΥ ΚΑΛΛΙΘΕΑΣ - ΑΓΚΙΣΤΡΙ 2026";
 
 const fallbackRaceDate =
-  "12 & 13 Σεπτεμβρίου 2026";
+  "19 & 20 Σεπτεμβρίου 2026";
 
 const fallbackRaceYear =
   "2026";
