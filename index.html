@@ -2,10 +2,11 @@
 <html lang="el">
 <head>
   <meta charset="UTF-8" />
-  <metφa name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>RegattaFlow - 9ο Κύπελλο Καλλιθέας 2026</title>
-<!-- Corrected to KORFOS settings architecture: 2026-08-11 -->
-<!-- FINAL PUBLIC SETTINGS ENDPOINT V4: 2026-08-11 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>RegattaFlow - ΠΛΑΤΦΟΡΜΑ TEST 2026</title>
+<!-- RegattaHub MASTER race template -->
+<!-- Race-specific values are injected by New Race Wizard -->
+<!-- TEST CLEAN HELPER v4: exact working boat lookup reference + local EIO Helper -->
 
   <style>
     * {
@@ -672,7 +673,7 @@ height: 100dvh !important;
     /* ΜΕΓΕΘΟΣ BANNER ΔΙΟΡΓΑΝΩΤΩΝ */
 #organizerBanner {
   display: block !important;
-  width: 680px !important;
+  width: 520px !important;
   max-width: 92% !important;
   height: auto !important;
   max-height: none !important;
@@ -691,16 +692,7 @@ height: 100dvh !important;
     margin: 14px auto 18px auto !important;
   }
 }
-  
-@media screen and (max-width: 600px) {
-  .cup-races-grid {
-    grid-template-columns: 1fr !important;
-    gap: 2px 0 !important;
-    text-align: center !important;
-  }
-}
-
-</style>
+  </style>
 </head>
 <body>
   <div class="page">
@@ -725,28 +717,9 @@ height: 100dvh !important;
 
 <div id="introRaceTitle" style="font-size:38px; font-weight:900; color:#28308f; text-align:center; letter-spacing:2px; margin:20px 0 12px 0;"></div>
 
-<div style="max-width:760px; margin:4px auto 10px auto; text-align:center; font-size:15px; font-weight:700; line-height:1.5; color:#2f241d;">
-  Συνδιοργάνωση: ΝΟΤΚ, ΙΟΠ-ΔΕΗ, ΝΑΟΕΦΚ, ΣΕΑΝΑΤΚ
-</div>
-
-<div style="max-width:760px; margin:10px auto 18px auto; padding:14px 16px; text-align:center; font-size:15px; line-height:1.55; color:#2f241d; background:rgba(255,255,255,0.55); border-radius:6px;">
-  <div style="max-width:560px; margin:0 auto 12px auto; text-align:left;">
-    <div class="cup-races-grid" style="display:grid; grid-template-columns:1fr auto; gap:6px 18px;">
-      <div><strong>ΚΟΡΦΟΣ 2026</strong></div><div><strong>12 &amp; 13 Σεπτεμβρίου 2026</strong></div>
-      <div><strong>ΑΓΚΙΣΤΡΙ 2026</strong></div><div><strong>19 &amp; 20 Σεπτεμβρίου 2026</strong></div>
-      <div><strong>ΜΕΘΑΝΑ 2026</strong></div><div><strong>10 &amp; 11 Οκτωβρίου 2026</strong></div>
-    </div>
-  </div>
-
-  <div style="margin-top:8px;">
-    Με την παρούσα δήλωση το σκάφος εγγράφεται και στους τρεις αγώνες και καταβάλλει μία φορά το δικαίωμα συμμετοχής.<br>
-    Για κάθε επόμενο αγώνα θα δηλώνεται μόνο το πλήρωμα που θα συμμετάσχει.
-  </div>
-</div>
-
 <div style="text-align:center; margin:10px auto 16px auto;">
 <div id="introRaceDate" style="display:inline-block; background:rgba(255,255,255,0.65); padding:5px 10px; font-size:15px;">
- Ημερομηνία διεξαγωγής του 1ου αγώνα ΚΟΡΦΟΣ: <span id="raceDate"></span>
+ Ημερομηνία διεξαγωγής αγώνα: <span id="raceDate"></span>
 </div>
 
 <div id="introSubmitExpiration" style="margin-top:6px; font-size:14px; font-weight:bold; color:#143a63;">
@@ -789,7 +762,7 @@ height: 100dvh !important;
           Για να συνεχίσετε θα πρέπει να έχετε πιστοποιητικό της Εθνικής Αρχής για το έτος 2026.
         </div>
         <div class="line5" id="noticeInfoText">
-          Για πληροφορίες: ΓΡΑΜΜΑΤΕΙΑ ΑΓΩΝΑ ΤΗΛ.: 210 4101 114
+          Για πληροφορίες: ΓΡΑΜΜΑΤΕΙΑ ΑΓΩΝΑ ΤΗΛ.: 210 4101113
         </div>
       </div>
 
@@ -804,9 +777,11 @@ height: 100dvh !important;
         <div class="result-title" id="resultText"></div>
       </div>
 
-      <div class="actions" id="actions"><button class="btn" id="continueBtn" type="button">ΚΑΤΑΧΩΡΗΣΗ ΠΛΗΡΩΜΑΤΟΣ</button>
+      <div class="actions" id="actions"><button class="btn" id="continueBtn" type="button">ΣΥΝΕΧΕΙΑ ΣΤΟ ΠΛΗΡΩΜΑ</button>
         <button class="btn secondary" id="newSearchBtn" type="button">ΝΕΑ ΑΝΑΖΗΤΗΣΗ</button>
       </div>
+
+      <!-- Η ενσωματωμένη φόρμα ΕΙΟ αφαιρέθηκε. Χρησιμοποιείται RegattaHub Helper. -->
 
 <div id="crewScreen" style="display:none; max-width:720px; margin:20px auto; border:1px solid #bfb6aa; padding:28px; background:white; text-align:center; border-radius:6px;">
 
@@ -1001,12 +976,11 @@ height: 100dvh !important;
     // =========================================
 
 const SETTINGS_WEB_APP_URL =
-  "https://script.google.com/macros/s/AKfycbw9kd0R_FliGWC1akVUAST3tCXbHY6ooKF4NJ9kMfcx6ib8SXTliRB7JdMd0_YzPVXe1w/exec";
+  "https://script.google.com/macros/s/AKfycbwZHkHtIf_wc9cMTh51gOUidUjBQ1b2-1JjmlZbUPzlfO1GnYpJ76lRIP0x2Gak_G52/exec";
 
-// Το μοναδικό αναγνωριστικό του αρχείου ΣΥΜΜΕΤΟΧΕΣ/ΡΥΘΜΙΣΕΙΣ για το Κύπελλο Καλλιθέας.
-// Μπορεί να αντικατασταθεί και από URL: ?settings=SPREADSHEET_ID
+// Το αρχείο ΣΥΜΜΕΤΟΧΕΣ / ΡΥΘΜΙΣΕΙΣ του συγκεκριμένου αγώνα.
 const DEFAULT_SETTINGS_SPREADSHEET_ID =
-  "1WNfPoNfxjvfZCwnKOpOJYUH_G_2xa06E9U3zG4BJhWw";
+  "1UPMKC_dUtJ958dgUpby3HYBwVPPyNe9AlastWySzK98";
 
 const PAGE_PARAMS = new URLSearchParams(window.location.search);
 const SETTINGS_SPREADSHEET_ID = String(
@@ -1023,37 +997,38 @@ function makeSettingsEndpoint() {
 }
 
 const CONFIG = {
-  RACE_PREFIX: "KALLITHEA_CUP_2026",
-  EVENT_TITLE: "9ο Κύπελλο Καλλιθέας 2026",
-  RACE_DATE: "12 & 13 Σεπτεμβρίου 2026",
-  SUBMIT_EXPIRATION: "10 ΣΕΠΤΕΜΒΡΙΟΥ ώρα 20:00",
+  RACE_PREFIX: "PLATFORMA_TEST_2026",
+  EVENT_TITLE: "ΠΛΑΤΦΟΡΜΑ TEST 2026",
+  RACE_DATE: "19 & 20 Σεπτεμβρίου 2026",
+  SUBMIT_EXPIRATION: "17 ΣΕΠΤΕΜΒΡΙΟΥ ώρα: 21:00",
+
   SETTINGS_SPREADSHEET_ID: SETTINGS_SPREADSHEET_ID,
   SETTINGS_ENDPOINT: makeSettingsEndpoint(),
 
-  // Ασφαλές fallback: το Κύπελλο απαιτεί επιλογή δύο εξοικειωμένων μελών.
-  // Αν υπάρχει τιμή OSR_RULE στο φύλλο ΡΥΘΜΙΣΕΙΣ, αυτή υπερισχύει.
   OSR_RULE: "YES",
 
-ORGANIZER_BANNER: "https://drive.google.com/thumbnail?id=1QpcKq4kdgPnM1tvSsutUk2tCObo4jPnI&sz=w2000",
-ORGANIZER_NAME: "",
-ORGANIZER_SHORT_NAME: "",
-ORGANIZER_EMAIL: "",
-ORGANIZER_TEL: "",
+  ORGANIZER_BANNER: "",
+  ORGANIZER_NAME: "",
+  ORGANIZER_SHORT_NAME: "",
+  ORGANIZER_EMAIL: "",
+  ORGANIZER_TEL: "",
+
   SHOW_RACE_TITLE: "YES",
 
-  JOTFORM_FORM_ID: "262128273107351",
-  JOTFORM_BASE_URL: "https://form.jotform.com/262128273107351",
+  JOTFORM_FORM_ID: "262470677464365",
+  JOTFORM_BASE_URL: "https://form.jotform.com/262470677464365",
+BOAT_LOOKUP_URL:
+  "https://script.google.com/macros/s/AKfycbweSV0ADfQEtl26B_lcxGjWHHgx0G8d5oYiZoK-ZvxQC4l2JPaIx9vEiWKmyDIXjvpkGQ/exec",
 
- BOAT_LOOKUP_URL:
-  "https://script.google.com/macros/s/AKfycbyeCL-cNAw0pEqdYC_Xuu2xq7qDKVuOsaoSpavonBtBurxw0cvDeDW0kJ09fIbDf3Vo/exec",
   PERSON_LOOKUP_URL:
     "https://script.google.com/macros/s/AKfycbw-zgZZeHRC6S5_f1xGkTwx-wXcFNq9z2O4cfhzAHSULQNDrwCp88vcvgU-617pgcg1/exec",
 
   EVENT_LOGO:
     "https://github.com/jsamartzis-png/logos/blob/main/logo_EntryFlow_removebg-preview.png?raw=true",
+
   EVENT_BACKGROUND: "background.jpg",
   YEAR: "2026",
-INFO_PHONE: "210 481-0390 / 0391"
+  INFO_PHONE: "210 4101113"
 };
 
 const SETTINGS_CACHE_KEY =
@@ -1337,7 +1312,7 @@ function loadJsonp(url, timeoutMs) {
 }
 
 async function loadRaceSettingsFromSheet() {
-  // Οι σωστές fallback τιμές του Κυπέλλου εμφανίζονται αμέσως, πριν από το δίκτυο.
+  // Οι fallback τιμές του αγώνα εμφανίζονται αμέσως, πριν από το δίκτυο.
   renderRaceSettings();
 
   const cached = readCachedRaceSettings();
@@ -1376,7 +1351,7 @@ const EVENT_LOGO = CONFIG.EVENT_LOGO;
 
 // Για δοκιμή το αφήνουμε ανοικτό.
 // Όταν θέλεις να κλείσει ο αγώνας, άλλαξε το σε false.
-const FORM_OPEN = false;
+const FORM_OPEN = true;
 const CLOSED_MESSAGE = "Ο αγώνας έχει κλείσει και δεν δέχεται πλέον συμμετοχές.";
 
 function getStorageKey() {
@@ -1537,14 +1512,6 @@ wosr_member_2: "wosr_member_2"
       scrollToElement(resultCard);
     }
 
-    function hideResult() {
-      resultCard.style.display = "none";
-      actions.style.display = "none";
-      formWrap.style.display = "none";
-      formFrame.src = "";
-      lastFoundData = null;
-    }
-
     function showMultipleBoatChoices(matches) {
       const boats = Array.isArray(matches) ? matches : [];
 
@@ -1553,27 +1520,22 @@ wosr_member_2: "wosr_member_2"
       formWrap.style.display = "none";
       formFrame.src = "";
 
-      const resultText = document.getElementById("resultText");
       resultText.innerHTML = "";
 
       const title = document.createElement("div");
-      title.style.fontWeight = "800";
-      title.style.fontSize = "18px";
-      title.style.marginBottom = "12px";
       title.textContent =
         "Βρέθηκαν περισσότερα από ένα σκάφη με αυτόν τον αριθμό ιστίου. Επιλέξτε το σωστό:";
+      title.style.marginBottom = "14px";
       resultText.appendChild(title);
-
-      const list = document.createElement("div");
-      list.style.display = "flex";
-      list.style.flexDirection = "column";
-      list.style.gap = "10px";
-      list.style.alignItems = "center";
 
       boats.forEach(function (boat) {
         const button = document.createElement("button");
         button.type = "button";
         button.className = "btn";
+        button.style.display = "block";
+        button.style.width = "100%";
+        button.style.maxWidth = "620px";
+        button.style.margin = "8px auto";
 
         const sailNo =
           String(boat.sailno_full || "").trim() ||
@@ -1585,24 +1547,27 @@ wosr_member_2: "wosr_member_2"
           (sailNo || "Χωρίς αριθμό") +
           (yachtName ? " — " + yachtName : "");
 
-        button.style.width = "100%";
-        button.style.maxWidth = "520px";
-        button.style.height = "auto";
-        button.style.minHeight = "44px";
-        button.style.padding = "10px 14px";
-
         button.addEventListener("click", function () {
           lastFoundData = boat;
-          showResult(lastFoundData);
+          showResult(boat);
           setStatus("Επιλέχθηκε το σωστό σκάφος.");
         });
 
-        list.appendChild(button);
+        resultText.appendChild(button);
       });
 
-      resultText.appendChild(list);
       resultCard.style.display = "block";
       scrollToElement(resultCard);
+    }
+
+
+
+    function hideResult() {
+      resultCard.style.display = "none";
+      actions.style.display = "none";
+      formWrap.style.display = "none";
+      formFrame.src = "";
+      lastFoundData = null;
     }
 
     
@@ -1639,8 +1604,8 @@ function getCrewPdfRows() {
 
 function buildPrefillUrl(data) {
   const params = new URLSearchParams();
-  // ΡΥΘΜΙΣΕΙΣ ΑΓΩΝΑ -> JOTFORM ΚΥΠΕΛΛΟΥ ΚΑΛΛΙΘΕΑΣ
-  // Η φόρμα του Κυπέλλου είναι παλαιότερος κλώνος και ορισμένα πεδία
+  // ΡΥΘΜΙΣΕΙΣ ΑΓΩΝΑ -> JOTFORM
+  // Ορισμένα πεδία της Jotform διατηρούν παλαιότερα Unique Names
   // διατηρούν ακόμη τα παλιά Unique Names (input289, input290, input532 κ.λπ.).
   // Στέλνουμε και το πραγματικό Unique Name και το καθαρό alias για συμβατότητα.
   params.set(fieldNames.race_title, CONFIG.EVENT_TITLE || "");
@@ -2306,71 +2271,226 @@ function hideSecondCaptain() {
     if (statusEl) statusEl.innerText = "";
   }
 }
+
+/* ============================================================
+   REGATTAHUB EIO HELPER — LOCAL LOOKUP BRIDGE
+   04/10/2026
+   Η σελίδα RegattaHub ΔΕΝ καλεί την ΕΙΟ.
+   Τα δεδομένα προέρχονται από το browser Helper και
+   χρησιμοποιούνται προσωρινά μόνο στην τρέχουσα σελίδα.
+   ============================================================ */
+
+const RH_EIO_HELPER_STORE = {
+  records: new Map(),
+  capturedAt: "",
+  sourceUrl: ""
+};
+
+function rhEioCardKey(value) {
+  const digits = String(value || "").replace(/\D/g, "");
+  return digits.replace(/^0+/, "") || digits;
+}
+
+function rhEioCleanText(value) {
+  return String(value || "")
+    .replace(/\u00a0/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function rhEioNorm(value) {
+  return String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[\s:：.\-]/g, "");
+}
+
+function rhEioFieldFromRecord(recordEl, labels) {
+  const wanted = new Set(labels.map(rhEioNorm));
+  const rows = Array.from(recordEl.querySelectorAll("p, tr, .row, .field, .info-row"));
+
+  for (const row of rows) {
+    const strong = row.querySelector("strong, th, .label");
+    if (!strong) continue;
+
+    if (!wanted.has(rhEioNorm(strong.textContent))) continue;
+
+    const clone = row.cloneNode(true);
+    const labelClone = clone.querySelector("strong, th, .label");
+    if (labelClone) labelClone.remove();
+
+    let value = rhEioCleanText(clone.textContent);
+    if (!value && row.querySelector("td")) {
+      const cells = row.querySelectorAll("td");
+      value = rhEioCleanText(cells[cells.length - 1]?.textContent || "");
+    }
+    return value;
+  }
+
+  return "";
+}
+
+function rhEioParseCapture(payload) {
+  const rawHtml = String(payload?.html || "");
+  if (!rawHtml.trim()) return [];
+
+  const doc = new DOMParser().parseFromString(rawHtml, "text/html");
+
+  let recordEls = Array.from(doc.querySelectorAll(".single-record"));
+
+  // Εφεδρική αναγνώριση αν αλλάξει λίγο η σελίδα της ΕΙΟ.
+  if (!recordEls.length) {
+    recordEls = Array.from(doc.querySelectorAll(
+      ".result-card, .search-result, .player-result, .result, article"
+    ));
+  }
+
+  // Αν υπάρχει μόνο ένα αποτέλεσμα και δεν έχει wrapper με γνωστή class,
+  // χρησιμοποιούμε το container του "Αποτέλεσμα Αναζήτησης".
+  if (!recordEls.length) {
+    const all = Array.from(doc.body.querySelectorAll("div"));
+    const candidate = all.find(el =>
+      /Αποτέλεσμα\s+Αναζήτησης/i.test(el.textContent || "") &&
+      /ΑΜ|Αριθμός\s+Μητρώου/i.test(el.textContent || "")
+    );
+    if (candidate) recordEls = [candidate];
+  }
+
+  const records = [];
+
+  for (const el of recordEls) {
+    const card = rhEioFieldFromRecord(el, [
+      "ΑΜ", "Α.Μ.", "Αριθμός Μητρώου", "Αριθμός Δελτίου"
+    ]);
+    const surname = rhEioFieldFromRecord(el, ["Επώνυμο"]);
+    const firstName = rhEioFieldFromRecord(el, ["Όνομα"]);
+    const club = rhEioFieldFromRecord(el, ["Όμιλος", "Σωματείο", "Club"]);
+    const status = rhEioFieldFromRecord(el, ["Κατάσταση", "Κατάσταση Δελτίου", "Status"]);
+
+    const key = rhEioCardKey(card);
+    if (!key || (!surname && !firstName)) continue;
+
+    records.push({
+      key,
+      card: String(card || "").replace(/\D/g, ""),
+      name: rhEioCleanText([surname, firstName].filter(Boolean).join(" ")),
+      club: rhEioCleanText(club),
+      status: rhEioCleanText(status)
+    });
+  }
+
+  return records;
+}
+
+function rhEioImportCapture(payload) {
+  const records = rhEioParseCapture(payload);
+
+  RH_EIO_HELPER_STORE.records.clear();
+  records.forEach(rec => RH_EIO_HELPER_STORE.records.set(rec.key, rec));
+  RH_EIO_HELPER_STORE.capturedAt = String(payload?.capturedAt || "");
+  RH_EIO_HELPER_STORE.sourceUrl = String(payload?.pageUrl || "");
+
+  if (!records.length) {
+    alert(
+      "Ο Helper παρέδωσε τη σελίδα, αλλά δεν αναγνωρίστηκαν δελτία.\n\n" +
+      "Κάντε αναζήτηση στο Μητρώο Αθλητών της ΕΙΟ, περιμένετε να εμφανιστούν τα αποτελέσματα " +
+      "και πατήστε «RegattaHub · Λήψη ΕΙΟ»."
+    );
+    return;
+  }
+
+  alert(
+    records.length === 1
+      ? "✓ Φορτώθηκε 1 δελτίο από την ΕΙΟ. Η αναζήτηση στο RegattaHub είναι έτοιμη."
+      : "✓ Φορτώθηκαν " + records.length + " δελτία από την ΕΙΟ. Η αναζήτηση στο RegattaHub είναι έτοιμη."
+  );
+}
+
+document.addEventListener("regattahub:eio-data", function (event) {
+  rhEioImportCapture(event.detail || {});
+});
+
+window.addEventListener("message", function (event) {
+  if (event.origin !== window.location.origin) return;
+  if (!event.data || event.data.source !== "REGATTAHUB_EIO_HELPER") return;
+  if (event.data.type !== "EIO_CAPTURE") return;
+  rhEioImportCapture(event.data.payload || {});
+});
+
 async function lookupPerson(input) {
-  const id = input.value.trim();
+  const id = String(input?.value || "").trim();
   if (!id) return;
 
- const row = input.parentElement.parentElement;
+  const row = input.parentElement?.parentElement;
+  if (!row) return;
+
   const nameEl = row.querySelector(".name");
   const clubEl = row.querySelector(".club");
   const cardEl = row.querySelector(".cardNumber");
   const statusEl = row.querySelector(".personStatus");
 
-  nameEl.innerText = "";
-  clubEl.innerText = "";
+  if (nameEl) nameEl.innerText = "";
+  if (clubEl) clubEl.innerText = "";
   if (cardEl) cardEl.innerText = "";
 
-if (statusEl) {
-  statusEl.innerText = "Γίνεται αναζήτηση…";
-  statusEl.style.color = "#5f5147";
-}
-
-refreshWosrSelectors();
-
-  try {
-    const res = await fetch(PERSON_LOOKUP_URL + "?type=person&id=" + encodeURIComponent(id));
-    const json = await res.json();
-
-    if (!json.found) {
-      nameEl.innerText = "Δεν βρέθηκε";
-      clubEl.innerText = "";
-
-      if (statusEl) {
-        statusEl.innerText = "✖ Το δελτίο δεν βρέθηκε. Παρακαλούμε ελέγξτε τον αριθμό.";
-        statusEl.style.color = "#b00020";
-      }
-
-      return;
-    }
-
-    nameEl.innerText = json.data.name || "";
- clubEl.innerText = shortClubName(json.data.club || "");
-    if (cardEl) cardEl.innerText = input.value.trim();
-    
-const crewSectionEl = document.getElementById("crewSection");
-
-if (crewSectionEl && input.closest("#crewScreen")) {
-  crewSectionEl.style.display = "block";
-
-  // Το κουμπί για Jotform να εμφανίζεται ΜΟΝΟ όταν έχει βρεθεί μέλος πληρώματος,
-  // όχι απλώς όταν βρέθηκε ο κυβερνήτης.
-  if (input.closest("#crewTable")) {
-    document.getElementById("continueToJotformBtn").style.display = "inline-block";
+  if (statusEl) {
+    statusEl.innerText = "Γίνεται τοπική αναζήτηση…";
+    statusEl.style.color = "#5f5147";
   }
-}
-    if (statusEl) {
-   statusEl.innerText = "✔ Βρέθηκε";
-statusEl.style.color = "#2e7d32";
-    }
 
-  } catch (err) {
-    console.error(err);
+  refreshWosrSelectors();
 
+  if (!RH_EIO_HELPER_STORE.records.size) {
     if (statusEl) {
-      statusEl.innerText = "✖ Σφάλμα επικοινωνίας. Παρακαλούμε δοκιμάστε ξανά.";
+      statusEl.innerText = "✖ Δεν έχουν φορτωθεί δεδομένα ΕΙΟ.";
       statusEl.style.color = "#b00020";
     }
+
+    alert(
+      "Δεν υπάρχουν ακόμη ενημερωμένα δεδομένα ΕΙΟ στον Helper.\\n\\n" +
+      "1. Ανοίξτε το Μητρώο Αθλητών της ΕΙΟ.\\n" +
+      "2. Αναζητήστε το δελτίο ή τα δελτία.\\n" +
+      "3. Πατήστε «RegattaHub · Λήψη ΕΙΟ».\\n" +
+      "4. Επιστρέψτε εδώ και πατήστε «ΕΙΟ → RegattaHub»."
+    );
+    return;
   }
+
+  const record = RH_EIO_HELPER_STORE.records.get(rhEioCardKey(id));
+
+  if (!record) {
+    if (nameEl) nameEl.innerText = "Δεν βρέθηκε";
+    if (clubEl) clubEl.innerText = "";
+
+    if (statusEl) {
+      statusEl.innerText =
+        "✖ Το δελτίο " + id + " δεν υπάρχει στα δεδομένα ΕΙΟ που φορτώθηκαν.";
+      statusEl.style.color = "#b00020";
+    }
+    return;
+  }
+
+  if (nameEl) nameEl.innerText = record.name || "";
+  if (clubEl) clubEl.innerText = shortClubName(record.club || "");
+  if (cardEl) cardEl.innerText = record.card || id;
+
+  const crewSectionEl = document.getElementById("crewSection");
+
+  if (crewSectionEl && input.closest("#crewScreen")) {
+    crewSectionEl.style.display = "block";
+
+    if (input.closest("#crewTable")) {
+      document.getElementById("continueToJotformBtn").style.display = "inline-block";
+    }
+  }
+
+  if (statusEl) {
+    statusEl.innerText = "✔ Βρέθηκε στα δεδομένα ΕΙΟ του Helper";
+    statusEl.style.color = "#2e7d32";
+  }
+
+  refreshWosrSelectors();
 }
 
 async function lookupBulkCrewCards() {
